@@ -1,1 +1,0 @@
-Egy igazán hasznos READEME  
