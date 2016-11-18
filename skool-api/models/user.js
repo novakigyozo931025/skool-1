@@ -12,16 +12,28 @@ var User = mongoose.model('User', {
 	isOwnEmail: {
 		type: Boolean
 	},
+	ownEmail: {
+		type: String
+	},
 	isOwnPhone: {
 		type: Boolean
+	},
+	ownPhone: {
+		type: String
 	},
 	experience: { //programozo tapasztalatai
 		type: Boolean,
 		required: true
 	},
+	exampleExperience: {
+		type: String
+	},
 	skoolExperience: { //valaha volt e már skool foglalkozáson
 		type: Boolean,
 		required: true
+	},
+	exampleSkoolExperience: {
+		type: String
 	},
 	nickName: {
 		type: String,

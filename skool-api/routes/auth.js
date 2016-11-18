@@ -11,12 +11,16 @@ router.post('/signup', function(req, res){
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		isOwnEmail: req.body.isOwnEmail,
+		ownEmail: req.body.ownEmail,
 		isOwnPhone: req.body.isOwnPhone,
+		ownPhone: req.body.ownPhone,
 		experience: req.body.experience,
+		exampleExperience: req.body.exampleExperience,
 		nickName: req.body.nickName,
 		birthDate: req.body.birthDate,
 		city: req.body.city,
 		skoolExperience: req.body.skoolExperience,
+		exampleSkoolExperience: req.body.exampleSkoolExperience,
 		email: req.body.email,
 		password: req.body.password
 	})
