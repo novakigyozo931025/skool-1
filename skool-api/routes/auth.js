@@ -28,12 +28,13 @@ router.post('/signup', function(req, res){
 	user.save(function (err) {
 	  if (err && err.code===11000) {
 	    return res.json({
-	    	message: "Something went wrong"
+	    	message: err
 	    });
 	  }
 	  if (err) {
 	    return res.json(err);
 	  }
+		console.log("Jejjj");
 	  res.json(user);
 	});
 });

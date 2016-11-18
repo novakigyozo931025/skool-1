@@ -43,7 +43,7 @@ var User = mongoose.model('User', {
 		}
 	},
 	birthDate: {
-		type: Date,
+		type: String,
 		required: true,
 	},
 	email: {
