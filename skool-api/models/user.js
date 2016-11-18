@@ -1,36 +1,36 @@
 var mongoose = require('mongoose');
 
 var User = mongoose.model('User', {
-	keresztnev: {
+	firstName: {
 		type: String,
 		required: true
 	},
-	vezeteknev: {
+	lastName: {
 		type: String,
 		required: true
 	},
-	sajatemail: {
+	isOwnEmail: {
 		type: Boolean
 	},
-	sajattelefon: {
+	isOwnPhone: {
 		type: Boolean
 	},
-	tapasztalat: { //programozoi tapasztalatai
+	experience: { //programozo tapasztalatai
 		type: Boolean,
 		required: true
 	},
-	skooltapasztalat: { //valaha volt e már skool foglalkozáson
+	skoolExperience: { //valaha volt e már skool foglalkozáson
 		type: Boolean,
 		required: true
 	},
-	felhasznalonev: {
+	nickName: {
 		type: String,
 		required: true,
 		index: {
 			unique: true
 		}
 	},
-	szuldatum: {
+	birthDate: {
 		type: Date,
 		required: true,
 	},
@@ -41,19 +41,19 @@ var User = mongoose.model('User', {
 			unique: true
 		}
 	},
-	varos: {
+	city: {
 		type: String,
 		required: true
 	},
-	jelszo: {
+	password: {
 		type: String,
 		required: true
 	},
-	foglalkozasok: { //azon események id-jait tartalmazza amelyre jelentkezett
+	events: { //azon események id-jait tartalmazza amelyre jelentkezett
 		type: Array,
 		default: []
 	},
-	varolista: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
+	inwaiting: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
 		type: Array,
 		default: []
 	},
