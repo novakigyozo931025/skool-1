@@ -13,49 +13,52 @@ var Event = mongoose.model('Event', {
  		type: String,
 		required: true
 	},
-	postcode: { //az esemény irányítószáma
+	houseNumber: { //az esemény házszáma
 		type: String,
 		required: true
 	},
-	eletkor: {
+	postCode: { //az esemény irányítószáma
+		type: String,
+		required: true
+	},
+	age: { //ajánlott életkora a résztvevőknek
 		type: Number,
 		required: true
 	},
-	datum: {
+	date: { //az eseméy megrendezésének dátuma
 		type: String,
 		required: true,
 	},
-	tipus: {
+	type: { // az esemény típusa
 		type: String,
 		required: true
 	},
-	tananyag: {
+	syllabus: { //a tananyag
 		type: String,
 		required: true
 	},
-	ar: {
+	price: { // az esemény ára
 		type: Number,
 		required: true
 	},
-	helyek: { //a megengedett legnagyobb letszam
+	freeSpaces: { //a megengedett legnagyobb letszam
 		type: Number,
 		required: true
 	},
-	resztvevok: { //a resztvevo userek id-jait tartalmazza
+	participants: { //a resztvevo userek id-jait tartalmazza
 		type: Array,
 		default: []
 	},
-	varolista: { //a varolistas userek id-jait tartalmazza
+	waitingList: { //a varolistas userek id-jait tartalmazza
 		type: Array,
 		default: []
 	},
-	tanarok: { //az eseményt tartó tanárok, önkéntesek id-jait tartalmazza
+	teachers: { //az eseményt tartó tanárok, önkéntesek id-jait tartalmazza
 		type: Array,
 		default: []
 	},
-	ertekeles: {
-		type: Number,
-		required: true
+	rating: { //az esemény értékelése
+		type: Number
 	},
 	created_at: {
 		type: Date,
