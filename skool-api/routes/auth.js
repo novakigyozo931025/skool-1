@@ -85,4 +85,14 @@ router.post('/login', function(req, res){
 	});
 });
 
+// users listing
+router.get('/list', function(req, res){
+	User.find({}, function(err, users){
+		if(err){
+			return res.json(err);
+		}
+		res.json(users);
+	})
+});
+
 module.exports = router;
