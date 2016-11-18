@@ -15,11 +15,11 @@ var User = mongoose.model('User', {
 	sajattelefon: {
 		type: Boolean
 	},
-	tapasztalat: {
+	tapasztalat: { //programozoi tapasztalatai
 		type: Boolean,
 		required: true
 	},
-	skooltapasztalat: {
+	skooltapasztalat: { //valaha volt e már skool foglalkozáson
 		type: Boolean,
 		required: true
 	},
@@ -45,16 +45,17 @@ var User = mongoose.model('User', {
 		type: String,
 		required: true
 	},
-	status: {
-		type: String,
-		default: "diak"
-	},
 	jelszo: {
 		type: String,
 		required: true
 	},
-	foglalkozasok: {
+	foglalkozasok: { //azon események id-jait tartalmazza amelyre jelentkezett
 		type: Array,
+		default: []
+	},
+	varolista: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
+		type: Array,
+		default: []
 	},
 	created_at: {
 		type: Date,

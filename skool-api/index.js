@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var authRouter = require('./routes/auth');
+var eventRouter = require('./routes/event');
 var expressJwt = require('express-jwt');
 var secret = require('./config').secret;
 

@@ -1,15 +1,19 @@
 var mongoose = require('mongoose');
 
 var Event = mongoose.model('Event', {
-	cim: {
+	title: { //az esemény címe
 		type: String,
 		required: true
 	},
-	varos: {
-		type: String,
+	city: { //az esemény városa
+ 		type: String,
 		required: true
 	},
-	szint: {
+	street: { //az esemény utcája
+ 		type: String,
+		required: true
+	},
+	postcode: { //az esemény irányítószáma
 		type: String,
 		required: true
 	},
@@ -18,7 +22,7 @@ var Event = mongoose.model('Event', {
 		required: true
 	},
 	datum: {
-		type: Date,
+		type: String,
 		required: true,
 	},
 	tipus: {
@@ -33,12 +37,21 @@ var Event = mongoose.model('Event', {
 		type: Number,
 		required: true
 	},
-	helyek: {
+	helyek: { //a megengedett legnagyobb letszam
 		type: Number,
 		required: true
 	},
-	resztvevok: {
+	resztvevok: { //a resztvevo userek id-jait tartalmazza
 		type: Array,
+		default: []
+	},
+	varolista: { //a varolistas userek id-jait tartalmazza
+		type: Array,
+		default: []
+	},
+	tanarok: { //az eseményt tartó tanárok, önkéntesek id-jait tartalmazza
+		type: Array,
+		default: []
 	},
 	ertekeles: {
 		type: Number,
