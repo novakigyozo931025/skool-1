@@ -53,6 +53,9 @@ var User = mongoose.model('User', {
 		type: String,
 		required: true
 	},
+	foglalkozasok: {
+		type: Array,
+	},
 	created_at: {
 		type: Date,
 		default: Date.now

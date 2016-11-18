@@ -37,6 +37,9 @@ var Event = mongoose.model('Event', {
 		type: Number,
 		required: true
 	},
+	resztvevok: {
+		type: Array,
+	},
 	ertekeles: {
 		type: Number,
 		required: true
