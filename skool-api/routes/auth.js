@@ -8,15 +8,15 @@ var secret = require('../config').secret;
 router.post('/signup', function(req, res){
 
 	var user = new User({
-		keresztnev: req.body.keresztnev,
-		vezeteknev: req.body.vezeteknev,
-		sajatemail: req.body.sajatemail,
-		tapasztalat: req.body.tapasztalat,
-		felhasznalonev: req.body.felhasznalonev,
-		szuldatum: req.body.szuldatum,
-		varos: req.body.varos,
-		sajattelefon: req.body.sajattelefon,
-		skooltapasztalat: req.body.skooltapasztalat,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		isOwnEmail: req.body.isOwnEmail,
+		isOwnPhone: req.body.isOwnPhone,
+		experience: req.body.experience,
+		nickName: req.body.nickName,
+		birthDate: req.body.birthDate,
+		city: req.body.city,
+		skoolExperience: req.body.skoolExperience,
 		email: req.body.email,
 		password: req.body.password
 	})
@@ -59,7 +59,7 @@ router.post('/login', function(req, res){
 	  	});
 	  }
 
-	  if (user.password!== req.body.password) {
+	  if (user.password !== req.body.password) {
 	  	return res.json({
 	  		message: "Wrong username or password"
 	  	});
@@ -67,7 +67,6 @@ router.post('/login', function(req, res){
 
 	  var payload = {
 	  	_id: user._id,
-	  	name: user.name,
 	  	regDate: user.created_at
 	  };
 

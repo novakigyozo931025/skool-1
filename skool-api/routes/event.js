@@ -16,23 +16,25 @@ router.get('/events', function(req, res){
 
 router.post('/addevent', function(req, res) {
 	var event = new Event({
-		cim: req.body.cim,
-		varos: req.body.varos,
-		szint: req.body.szint,
-		eletkor: req.body.eletkor,
-		datum: req.body.datum,
-		tipus: req.body.tipus,
-		tananyag: req.body.tananyag,
-		ar: req.body.ar,
-		helyek: req.body.helyek,
-		
+		title: req.body.title,
+		city: req.body.city,
+		street: req.body.street,
+		houseNumber: req.body.houseNumber,
+		postCode: req.body.postCode,
+		age: req.body.age,
+		date: req.body.date,
+		type: req.body.type,
+		syllabus: req.body.syllabus,
+		text: req.body.text,
+		price: req.body.price,
+		freeSpaces: req.body.freeSpaces,
+		teachers: req.body.teachers
 	})
 
-	todo.save(function (err) {
+	event.save(function (err) {
 	  if (err) {
 	    return res.json(err);
 	  }
-
 	  res.json(todo);
 	});
 })
@@ -43,12 +45,25 @@ router.put('/addresztvevo', function(req, res){
 			return console.log(err);
 		}
 		event.resztvevok.push(req.body.userId)
+
+		event.save(function (err) {
+		  if (err) {
+		    return res.json(err);
+		  }
+		  res.json(event);
+		});
 	})
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
 			return console.log(err);
 		}
 		user.foglalkozasok.push(req.body.eventId)
+		user.save(function (err) {
+		  if (err) {
+		    return res.json(err);
+		  }
+		  res.json(user);
+		});
 		console.log("Added");
 	})
 })

@@ -37,9 +37,14 @@ var Event = mongoose.model('Event', {
 		type: String,
 		required: true
 	},
+	text: { //a tananyag
+		type: String,
+		required: true
+	},
 	price: { // az esemény ára
 		type: Number,
-		required: true
+		required: true,
+		default: 0
 	},
 	freeSpaces: { //a megengedett legnagyobb letszam
 		type: Number,
