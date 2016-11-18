@@ -45,6 +45,10 @@ var User = mongoose.model('User', {
 		type: String,
 		required: true
 	},
+	status: {
+		type: String,
+		default: "diak"
+	},
 	jelszo: {
 		type: String,
 		required: true
