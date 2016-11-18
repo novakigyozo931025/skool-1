@@ -1,0 +1,1 @@
+images, css, js that ar not part of angular, libs
