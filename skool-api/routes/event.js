@@ -5,6 +5,7 @@ var router = express.Router();
 var secret = require('../config').secret;
 var Event = require('../models/event');
 
+//foglalkozások lekérése
 router.get('/events', function(req, res){
 	Event.find({}, function(err, fogl){
 		if(err){
@@ -14,6 +15,7 @@ router.get('/events', function(req, res){
 	})
 });
 
+// foglalkozás hozzáadása
 router.post('/addevent', function(req, res) {
 	var event = new Event({
 		title: req.body.title,
@@ -39,12 +41,13 @@ router.post('/addevent', function(req, res) {
 	});
 })
 
-router.put('/addresztvevo', function(req, res){
+// foglalkozásra jelentkezés - user
+router.put('/addparticipant', function(req, res){
 	Event.findById(req.body.eventId, function(err, event) {
 		if (err) {
 			return console.log(err);
 		}
-		event.resztvevok.push(req.body.userId)
+		event.participants.push(req.body.userId)
 
 		event.save(function (err) {
 		  if (err) {
@@ -58,6 +61,53 @@ router.put('/addresztvevo', function(req, res){
 			return console.log(err);
 		}
 		user.foglalkozasok.push(req.body.eventId)
+		user.save(function (err) {
+		  if (err) {
+		    return res.json(err);
+		  }
+		  res.json(user);
+		});
+		console.log("Added");
+	})
+})
+
+// foglalkozás lemondása - user
+router.put('/delparticipant', function(req, res){
+	Event.findById(req.body.eventId, function(err, event) {
+		if (err) {
+			return console.log(err);
+		}
+
+		var index = event.participants.indexOf(req.body.userId);
+		delete event.participants[index]
+
+		event.save(function (err) {
+		  if (err) {
+		    return res.json(err);
+		  }
+		  res.json(event);
+		});
+	})
+	User.findById(req.body.userId, function(err, user) {
+		if (err) {
+			return console.log(err);
+		}
+
+		if (user.events.indexOf(req.body.eventId) !== -1) {
+			var index = user.events.indexOf(req.body.eventId);
+			delete user.events[index];
+		}
+		else if (user.events.indexOf(req.body.eventId) !== -1) {
+			var index = user.events.indexOf(req.body.eventId);
+			delete user.events[index];
+		}
+		else {
+			res.json({
+				message: "Nem voltál a jelentkezettek között"
+			})
+		}
+
+
 		user.save(function (err) {
 		  if (err) {
 		    return res.json(err);

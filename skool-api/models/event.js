@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Promise = require('bluebird')
 
 var Event = mongoose.model('Event', {
 	title: { //az esemény címe

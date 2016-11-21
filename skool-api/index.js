@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var authRouter = require('./routes/auth');
+var userRouter = require('./routes/user');
 var eventRouter = require('./routes/event');
 var expressJwt = require('express-jwt');
 var secret = require('./config').secret;
@@ -11,6 +11,11 @@ var mongoose = require('mongoose');
 var db = process.env.MONGODB_URI || 'mongodb://localhost/skool';
 mongoose.connect(db);
 
+// promise lib
+var Promise = require('bluebird')
+mongoose.Promise = Promise
+Promise.promisifyAll(mongoose);
+
 // express middleware
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -19,7 +24,7 @@ app.use(express.static('public'));
 app.use('/api/events', eventRouter);
 
 // auth routes
-app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 // err
 app.use(function(err, req, res, next){
