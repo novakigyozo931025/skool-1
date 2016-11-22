@@ -74,7 +74,7 @@ var User = mongoose.model('User', {
 		type: Array,
 		default: []
 	},
-	inwaiting: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
+	inWaiting: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
 		type: Array,
 		default: []
 	},

@@ -19,11 +19,11 @@ var Event = mongoose.model('Event', {
 		required: true
 	},
 	postCode: { //az esemény irányítószáma
-		type: String,
+		type: Number,
 		required: true
 	},
 	age: { //ajánlott életkora a résztvevőknek
-		type: Number,
+		type: String,
 		required: true
 	},
 	date: { //az eseméy megrendezésének dátuma
