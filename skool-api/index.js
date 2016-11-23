@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // event routes
-app.use('/api/event', eventRouter);
+app.use('/api/events', eventRouter);
 
 // auth routes
 app.use('/api/user', userRouter);
