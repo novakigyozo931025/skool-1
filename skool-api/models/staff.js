@@ -39,7 +39,7 @@ var User = mongoose.model('Staff', {
 	state: { //önkéntes, dolgozó -e
 		type: String,
 		required: true
-	}
+	},
 	created_at: {
 		type: Date,
 		default: Date.now
