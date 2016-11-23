@@ -26,7 +26,7 @@ router.post('/signup', function(req, res){
 		password: req.body.password,
 		sni: req.body.sni,
 		foodSens: req.body.foodSens
-	})
+	});
 
 	user.save(function (err) {
 	  if (err && err.code===11000) {
@@ -137,5 +137,25 @@ router.get('/stafflist', function(req, res){
 });
 
 // önkéntes delete
-router.delete('')
+router.delete('/delvolunteer', function(req, res){
+	Staff.findById(req.body._id , function(err,staff){
+		if(err){
+			return res.json(err);
+		}
+		staff.remove(function(err){
+			if(err){
+				return res.json(err);
+			}
+
+			res.json({
+				message:"staff removed"
+			});
+		});
+	});
+
+
+
+
+
+});
 module.exports = router;
