@@ -106,14 +106,16 @@ router.put('/delparticipant', function(req, res){
 		}
 
 		var index = event.participants.indexOf(req.body.userId);
-		delete event.participants[index]
+		if (index !== -1) {
+			delete event.participants[index]
 
-		event.save(function (err) {
-		  if (err) {
-		    return res.json(err);
-		  }
-		  res.json(event);
-		});
+			event.save(function (err) {
+			  if (err) {
+			    return res.json(err);
+			  }
+			  res.json(event);
+			});
+		}
 	})
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
@@ -124,9 +126,9 @@ router.put('/delparticipant', function(req, res){
 			var index = user.events.indexOf(req.body.eventId);
 			delete user.events[index];
 		}
-		else if (user.events.indexOf(req.body.eventId) !== -1) {
-			var index = user.events.indexOf(req.body.eventId);
-			delete user.events[index];
+		else if (user.inWaiting.indexOf(req.body.eventId) !== -1) {
+			var index = user.inWaiting.indexOf(req.body.eventId);
+			delete user.inWaiting[index];
 		}
 		else {
 			res.json({
