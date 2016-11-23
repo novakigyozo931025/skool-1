@@ -36,10 +36,10 @@ var User = mongoose.model('Staff', {
 		type: Array,
 		default: []
 	},
-	state: { //önkéntes, dolgozó -e
+	state: { //onkentes v dolgozo v admin
 		type: String,
 		required: true
-	}
+	},
 	created_at: {
 		type: Date,
 		default: Date.now
