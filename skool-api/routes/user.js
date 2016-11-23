@@ -52,7 +52,7 @@ router.post('/signupstaff', function(req, res){
 		email: req.body.email,
 		password: req.body.password,
 		state: req.body.state
-	})
+	});
 
 	staff.save(function (err) {
 	  if (err && err.code===11000) {
@@ -73,13 +73,13 @@ router.post('/login', function(req, res){
 	if(!req.body.email){
 		return res.json({
 			err: "Email is required"
-		})
+		});
 	}
 
 	if(!req.body.password){
 		return res.json({
 			err: "Password is required"
-		})
+		});
 	}
 
 	User.findOne({email: req.body.email}, function(err, user){
@@ -111,7 +111,7 @@ router.post('/login', function(req, res){
 	  res.json({
 	  	token: token,
 	  	payload: payload
-	  })
+	  });
 	});
 });
 
@@ -122,7 +122,7 @@ router.get('/list', function(req, res){
 			return res.json(err);
 		}
 		res.json(users);
-	})
+	});
 });
 
 // staff listing
@@ -132,9 +132,9 @@ router.get('/stafflist', function(req, res){
 			return res.json(err);
 		}
 		res.json(users);
-	})
+	});
 });
 
-//
-
+// önkéntes delete
+router.delete('')
 module.exports = router;
