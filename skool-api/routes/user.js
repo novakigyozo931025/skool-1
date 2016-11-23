@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 var secret = require('../config').secret;
 
-// register
+// register - user
 router.post('/signup', function(req, res){
 
 	var user = new User({
@@ -22,19 +22,49 @@ router.post('/signup', function(req, res){
 		skoolExperience: req.body.skoolExperience,
 		exampleSkoolExperience: req.body.exampleSkoolExperience,
 		email: req.body.email,
-		password: req.body.password
+		password: req.body.password,
+		sni: req.body.sni,
+		foodSens: req.body.foodSens
 	})
 
 	user.save(function (err) {
 	  if (err && err.code===11000) {
 	    return res.json({
-	    	message: "Something went wrong"
+	    	message: err
 	    });
 	  }
 	  if (err) {
 	    return res.json(err);
 	  }
+		console.log("Jejjj");
 	  res.json(user);
+	});
+});
+
+// register - staff
+router.post('/signupstaff', function(req, res){
+
+	var staff = new Staff({
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		nickName: req.body.nickName,
+		city: req.body.city,
+		email: req.body.email,
+		password: req.body.password,
+		state: req.body.state
+	})
+
+	staff.save(function (err) {
+	  if (err && err.code===11000) {
+	    return res.json({
+	    	message: err
+	    });
+	  }
+	  if (err) {
+	    return res.json(err);
+	  }
+		console.log("Jejjj");
+	  res.json(staff);
 	});
 });
 
@@ -84,5 +114,27 @@ router.post('/login', function(req, res){
 	  })
 	});
 });
+
+// users listing
+router.get('/list', function(req, res){
+	User.find({}, function(err, users){
+		if(err){
+			return res.json(err);
+		}
+		res.json(users);
+	})
+});
+
+// staff listing
+router.get('/stafflist', function(req, res){
+	Staff.find({}, function(err, users){
+		if(err){
+			return res.json(err);
+		}
+		res.json(users);
+	})
+});
+
+//
 
 module.exports = router;

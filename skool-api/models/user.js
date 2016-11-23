@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Promise = require('bluebird')
 
 var User = mongoose.model('User', {
 	firstName: {
@@ -43,7 +44,7 @@ var User = mongoose.model('User', {
 		}
 	},
 	birthDate: {
-		type: Date,
+		type: String,
 		required: true,
 	},
 	email: {
@@ -61,11 +62,19 @@ var User = mongoose.model('User', {
 		type: String,
 		required: true
 	},
+	sni: {
+		type: String,
+		default: "nem"
+	},
+	foodSens: {
+		type: String,
+		default: "nem"
+	},
 	events: { //azon események id-jait tartalmazza amelyre jelentkezett
 		type: Array,
 		default: []
 	},
-	inwaiting: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
+	inWaiting: { //azon események id-jait tartalmazza amelyeknél várólistán van a user
 		type: Array,
 		default: []
 	},
