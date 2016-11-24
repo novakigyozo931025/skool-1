@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Latest compiled and minified CSS -->
@@ -10,18 +11,14 @@
 </head>
 <body ng-app="Skool">
 
-
-<eventdir></eventdir>
+<header-directive></header-directive>
 
 
 <!-- Modules -->
 <script src="app/app.module.js"></script>
-
 <!-- Controllers -->
-<script src="app/shared/header/HeaderController.js"></script>
-
+<script src="app/shared/header/header_controller.js"></script>
 <!-- Directives -->
-<script src="app/shared/header/HeaderDirective.js"/>
-<script src="app/app.route.js"/>
+<script src="app/shared/header/header_directive.js"></script>
 </body>
 </html>
