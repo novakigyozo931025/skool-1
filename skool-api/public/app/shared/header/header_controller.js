@@ -1,3 +1,3 @@
 var app = angular.module('Skool');
-app.controller('headerController', ['$http', function($http) {
+app.controller('header_controller', ['$http', function($http) {
 }]);
