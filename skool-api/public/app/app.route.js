@@ -4,13 +4,9 @@ app.config(function($routeProvider) {
         .when("/", {
             templateUrl : "index.htm"
         })
-        .when("/red", {
-            templateUrl : "red.htm"
+        .when("/tudasbazis", {
+            templateUrl : "component/tudasbazis.html",
+            controller : "component/tudasbazis/"
         })
-        .when("/green", {
-            templateUrl : "green.htm"
-        })
-        .when("/blue", {
-            templateUrl : "blue.htm"
-        });
+        .otherwise({ redirectTo: '/'});
 });
