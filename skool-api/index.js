@@ -12,8 +12,8 @@ var db = process.env.MONGODB_URI || 'mongodb://localhost/skool';
 mongoose.connect(db);
 
 // promise lib
-var Promise = require('bluebird')
-mongoose.Promise = Promise
+var Promise = require('bluebird');
+mongoose.Promise = Promise;
 Promise.promisifyAll(mongoose);
 
 // express middleware
@@ -28,12 +28,12 @@ app.use('/api/user', userRouter);
 
 // err
 app.use(function(err, req, res, next){
-	res.status(400).json(err)
-})
+	res.status(400).json(err);
+});
 
 // bad map
 app.use('/*',function(req, res){
-	res.send("Page not found")
+	res.send("Page not found");
 });
 
 // app listener
