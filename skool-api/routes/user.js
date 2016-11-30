@@ -152,10 +152,6 @@ router.delete('/delvolunteer', function(req, res){
 			});
 		});
 	});
-
-
-
-
-
 });
+
 module.exports = router;
