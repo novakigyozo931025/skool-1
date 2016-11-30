@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Promise = require('bluebird')
+var Promise = require('bluebird') ;
 
 var User = mongoose.model('Staff', {
 	firstName: {

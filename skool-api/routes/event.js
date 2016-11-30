@@ -107,7 +107,7 @@ router.put('/delparticipant', function(req, res){
 
 		var index = event.participants.indexOf(req.body.userId);
 		if (index !== -1) {
-			delete event.participants[index]
+			delete event.participants[index];
 
 			event.save(function (err) {
 			  if (err) {
@@ -116,7 +116,7 @@ router.put('/delparticipant', function(req, res){
 			  res.json(event);
 			});
 		}
-	})
+	});
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
 			return console.log(err);
@@ -133,7 +133,7 @@ router.put('/delparticipant', function(req, res){
 		else {
 			res.json({
 				message: "Nem voltál a jelentkezettek között"
-			})
+			});
 		}
 
 
@@ -144,7 +144,7 @@ router.put('/delparticipant', function(req, res){
 		  res.json(user);
 		});
 		console.log("Added");
-	})
-})
+	});
+});
 
 module.exports = router;
