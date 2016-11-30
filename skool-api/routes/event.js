@@ -4,6 +4,9 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 var secret = require('../config').secret;
 var Event = require('../models/event');
+var log = require('../logger');
+
+
 
 //foglalkozások lekérése
 router.get('/events', function(req, res){
@@ -45,9 +48,10 @@ router.post('/addevent', function(req, res) {
 router.put('/addparticipant', function(req, res){
 	var freeSpaces;
 	var good = true;
+
 	Event.findById(req.body.eventId, function(err, event) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		var index = event.participants.indexOf(req.body.userId);
@@ -68,10 +72,10 @@ router.put('/addparticipant', function(req, res){
 	});
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 		if (good === false) {
-			return console.log("Something wet wrong!");
+			return log.info("Something wet wrong!");
 		}
 
 		var indexE = user.events.indexOf(req.body.userId);
@@ -94,7 +98,7 @@ router.put('/addparticipant', function(req, res){
 			return res.send("already in");
 		}
 		res.send("kk");
-		console.log("Added");
+		log.info("Added");
 	});
 });
 
@@ -102,7 +106,7 @@ router.put('/addparticipant', function(req, res){
 router.put('/delparticipant', function(req, res){
 	Event.findById(req.body.eventId, function(err, event) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		var index = event.participants.indexOf(req.body.userId);
@@ -119,7 +123,7 @@ router.put('/delparticipant', function(req, res){
 	});
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		if (user.events.indexOf(req.body.eventId) !== -1) {
@@ -127,8 +131,8 @@ router.put('/delparticipant', function(req, res){
 			delete user.events[index];
 		}
 		else if (user.inWaiting.indexOf(req.body.eventId) !== -1) {
-			var index = user.inWaiting.indexOf(req.body.eventId);
-			delete user.inWaiting[index];
+			var index2 = user.inWaiting.indexOf(req.body.eventId);
+			delete user.inWaiting[index2];
 		}
 		else {
 			res.json({
@@ -143,7 +147,7 @@ router.put('/delparticipant', function(req, res){
 		  }
 		  res.json(user);
 		});
-		console.log("Added");
+		log.info("Added");
 	});
 });
 

@@ -4,6 +4,7 @@ var Staff = require('../models/staff');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var secret = require('../config').secret;
+var log = require('../logger');
 
 // register - user
 router.post('/signup', function(req, res){
@@ -37,7 +38,7 @@ router.post('/signup', function(req, res){
 	  if (err) {
 	    return res.json(err);
 	  }
-		console.log("Jejjj");
+		log.info("Jejjj");
 	  res.json(user);
 	});
 });
@@ -64,7 +65,7 @@ router.post('/signupstaff', function(req, res){
 	  if (err) {
 	    return res.json(err);
 	  }
-		console.log("Jejjj");
+		log.info("Jejjj");
 	  res.json(staff);
 	});
 });
@@ -117,7 +118,7 @@ router.post('/login', function(req, res){
 });
 
 // users listing
-router.get('/list', function(req, res){
+route .get('/list', function(req, res){
 	User.find({}, function(err, users){
 		if(err){
 			return res.json(err);

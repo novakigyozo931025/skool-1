@@ -5,6 +5,8 @@ var userRouter = require('./routes/user');
 var eventRouter = require('./routes/event');
 var expressJwt = require('express-jwt');
 var secret = require('./config').secret;
+var log = require('./logger');
+
 
 // mongoose
 var mongoose = require('mongoose');
@@ -38,5 +40,5 @@ app.use('/*',function(req, res){
 
 // app listener
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Listening on port 3000!');
+  log.info('Listening on port 3000!');
 });
