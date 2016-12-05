@@ -1,8 +1,10 @@
 var express = require('express');
 var User = require('../models/user');
+var Staff = require('../models/staff');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var secret = require('../config').secret;
+var log = require('../logger');
 
 // register - user
 router.post('/signup', function(req, res){
@@ -25,7 +27,7 @@ router.post('/signup', function(req, res){
 		password: req.body.password,
 		sni: req.body.sni,
 		foodSens: req.body.foodSens
-	})
+	});
 
 	user.save(function (err) {
 	  if (err && err.code===11000) {
@@ -36,7 +38,7 @@ router.post('/signup', function(req, res){
 	  if (err) {
 	    return res.json(err);
 	  }
-		console.log("Jejjj");
+		log.info("Jejjj");
 	  res.json(user);
 	});
 });
@@ -52,7 +54,7 @@ router.post('/signupstaff', function(req, res){
 		email: req.body.email,
 		password: req.body.password,
 		state: req.body.state
-	})
+	});
 
 	staff.save(function (err) {
 	  if (err && err.code===11000) {
@@ -63,7 +65,7 @@ router.post('/signupstaff', function(req, res){
 	  if (err) {
 	    return res.json(err);
 	  }
-		console.log("Jejjj");
+		log.info("Jejjj");
 	  res.json(staff);
 	});
 });
@@ -73,13 +75,13 @@ router.post('/login', function(req, res){
 	if(!req.body.email){
 		return res.json({
 			err: "Email is required"
-		})
+		});
 	}
 
 	if(!req.body.password){
 		return res.json({
 			err: "Password is required"
-		})
+		});
 	}
 
 	User.findOne({email: req.body.email}, function(err, user){
@@ -111,7 +113,7 @@ router.post('/login', function(req, res){
 	  res.json({
 	  	token: token,
 	  	payload: payload
-	  })
+	  });
 	});
 });
 
@@ -122,7 +124,7 @@ router.get('/list', function(req, res){
 			return res.json(err);
 		}
 		res.json(users);
-	})
+	});
 });
 
 // staff listing
@@ -132,9 +134,29 @@ router.get('/stafflist', function(req, res){
 			return res.json(err);
 		}
 		res.json(users);
-	})
+	});
 });
 
-//
+// önkéntes delete
+router.delete('/delvolunteer', function(req, res){
+	Staff.findById(req.body._id , function(err,staff){
+		if(err){
+			return res.json(err);
+		}
+		staff.remove(function(err){
+			if(err){
+				return res.json(err);
+			}
 
+			res.json({
+				message:"staff removed"
+			});
+		});
+	});
+
+
+
+
+
+});
 module.exports = router;

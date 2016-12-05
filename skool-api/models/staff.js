@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Promise = require('bluebird')
+var Promise = require('bluebird') ;
 
 var User = mongoose.model('Staff', {
 	firstName: {
@@ -36,7 +36,7 @@ var User = mongoose.model('Staff', {
 		type: Array,
 		default: []
 	},
-	state: { //önkéntes, dolgozó -e
+	state: { //onkentes v dolgozo v admin
 		type: String,
 		required: true
 	},

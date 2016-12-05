@@ -4,6 +4,9 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 var secret = require('../config').secret;
 var Event = require('../models/event');
+var log = require('../logger');
+
+
 
 //foglalkozások lekérése
 router.get('/events', function(req, res){
@@ -12,7 +15,7 @@ router.get('/events', function(req, res){
 			return res.json(err);
 		}
 		res.json(fogl);
-	})
+	});
 });
 
 // foglalkozás hozzáadása
@@ -31,7 +34,7 @@ router.post('/addevent', function(req, res) {
 		price: req.body.price,
 		freeSpaces: req.body.freeSpaces,
 		teachers: req.body.teachers
-	})
+	});
 
 	event.save(function (err) {
 	  if (err) {
@@ -39,20 +42,21 @@ router.post('/addevent', function(req, res) {
 	  }
 	  res.json(event);
 	});
-})
+});
 
 // foglalkozásra jelentkezés - user
 router.put('/addparticipant', function(req, res){
 	var freeSpaces;
 	var good = true;
+
 	Event.findById(req.body.eventId, function(err, event) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		var index = event.participants.indexOf(req.body.userId);
 		if (index === -1) {
-			event.participants.push(req.body.userId)
+			event.participants.push(req.body.userId);
 			freeSpaces = req.body.freeSpaces;
 			event.save(function (err) {
 			  if (err) {
@@ -62,16 +66,16 @@ router.put('/addparticipant', function(req, res){
 		}
 		else {
 			good = false;
-			return res.send("already in")
+			return res.send("already in");
 		}
 
-	})
+	});
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 		if (good === false) {
-			return console.log("Something wet wrong!");
+			return log.info("Something wet wrong!");
 		}
 
 		var indexE = user.events.indexOf(req.body.userId);
@@ -79,10 +83,10 @@ router.put('/addparticipant', function(req, res){
 
 		if (indexE === -1 && indexW === -1) {
 			if (freeSpaces !== 0) {
-				event.participants.push(req.body.userId)
+				event.participants.push(req.body.userId);
 			}
 			else {
-				event.waitingList.push(req.body.userId)
+				event.waitingList.push(req.body.userId);
 			}
 			event.save(function (err) {
 			  if (err) {
@@ -91,47 +95,49 @@ router.put('/addparticipant', function(req, res){
 			});
 		}
 		else {
-			return res.send("already in")
+			return res.send("already in");
 		}
-		res.send("kk")
-		console.log("Added");
-	})
-})
+		res.send("kk");
+		log.info("Added");
+	});
+});
 
 // foglalkozás lemondása - user
 router.put('/delparticipant', function(req, res){
 	Event.findById(req.body.eventId, function(err, event) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		var index = event.participants.indexOf(req.body.userId);
-		delete event.participants[index]
+		if (index !== -1) {
+			delete event.participants[index];
 
-		event.save(function (err) {
-		  if (err) {
-		    return res.json(err);
-		  }
-		  res.json(event);
-		});
-	})
+			event.save(function (err) {
+			  if (err) {
+			    return res.json(err);
+			  }
+			  res.json(event);
+			});
+		}
+	});
 	User.findById(req.body.userId, function(err, user) {
 		if (err) {
-			return console.log(err);
+			return log.info(err);
 		}
 
 		if (user.events.indexOf(req.body.eventId) !== -1) {
 			var index = user.events.indexOf(req.body.eventId);
 			delete user.events[index];
 		}
-		else if (user.events.indexOf(req.body.eventId) !== -1) {
-			var index = user.events.indexOf(req.body.eventId);
-			delete user.events[index];
+		else if (user.inWaiting.indexOf(req.body.eventId) !== -1) {
+			var index2 = user.inWaiting.indexOf(req.body.eventId);
+			delete user.inWaiting[index2];
 		}
 		else {
 			res.json({
 				message: "Nem voltál a jelentkezettek között"
-			})
+			});
 		}
 
 
@@ -141,8 +147,8 @@ router.put('/delparticipant', function(req, res){
 		  }
 		  res.json(user);
 		});
-		console.log("Added");
-	})
-})
+		log.info("Added");
+	});
+});
 
 module.exports = router;
