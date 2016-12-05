@@ -31,7 +31,7 @@ app.use('/api/user', userRouter);
 
 
 //blog routes
-app.use("/api/blog", userRouter);
+app.use("/api/blog", blogRouter);
 
 // err
 app.use(function(err, req, res, next){

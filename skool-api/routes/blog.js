@@ -19,7 +19,7 @@ router.get('/getblog',function(req,res){
 //blog hozzáadása
 router.post('/addblog',function(req,res){
   var blog = new Blog({
-    title : req.body.title ,
+    title : req.body.title,
     intro : req.body.intro,
     html : req.body.html
   });
@@ -32,3 +32,4 @@ router.post('/addblog',function(req,res){
   });
 
 });
+module.exports = router;
