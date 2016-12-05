@@ -8,7 +8,7 @@ var log = require('../logger');
 
 //blog lekérése
 router.get('/getblog',function(req,res){
-  Blog.find({},function(req,blo){
+  Blog.find({},function(err ,blo){
     if (err){
       return res.json(err);
     }
@@ -19,7 +19,7 @@ router.get('/getblog',function(req,res){
 //blog hozzáadása
 router.post('/addblog',function(req,res){
   var blog = new Blog({
-    title : req.body.title ,
+    title : req.body.title,
     intro : req.body.intro,
     html : req.body.html
   });
