@@ -32,3 +32,5 @@ router.post('/addblog',function(req,res){
   });
 
 });
+
+module.exports = router;
