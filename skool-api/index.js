@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var userRouter = require('./routes/user');
 var eventRouter = require('./routes/event');
+var blogRouter = require('./routes/blog');
 var expressJwt = require('express-jwt');
 var secret = require('./config').secret;
 var log = require('./logger');
@@ -27,6 +28,10 @@ app.use('/api/event', eventRouter);
 
 // auth routes
 app.use('/api/user', userRouter);
+
+
+//blog routes
+app.use("/api/blog", userRouter);
 
 // err
 app.use(function(err, req, res, next){
