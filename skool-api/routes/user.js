@@ -118,7 +118,7 @@ router.post('/login', function(req, res){
 });
 
 // users listing
-route .get('/list', function(req, res){
+router.get('/list', function(req, res){
 	User.find({}, function(err, users){
 		if(err){
 			return res.json(err);
