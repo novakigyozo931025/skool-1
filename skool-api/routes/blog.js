@@ -8,11 +8,11 @@ var log = require('../logger');
 
 //blog lekérése
 router.get('/getblog',function(req,res){
-  Blog.find({},function(err ,blo){
+  Blog.find({},function(err ,blog){
     if (err){
       return res.json(err);
     }
-    res.json(blo);
+    res.json(blog);
   });
 });
 
@@ -31,6 +31,25 @@ router.post('/addblog',function(req,res){
     res.json(blog);
   });
 
+});
+
+
+//blog törlése
+router.delete('/delblog',function(res,req){
+    Blog.findById(req.body._id , function(err,blog){
+         if (err){
+           return res.json(err);
+         }
+          blog.remove(function(err){
+           if (err){
+             return res.json(err);
+           }
+
+            res.json({
+             message: "Blog removed"
+            });
+          });
+    });
 });
 
 module.exports = router;
