@@ -35,21 +35,22 @@ router.post('/addblog',function(req,res){
 
 
 //blog törlése
-router.delete('/delblog',function(res,req){
-    Blog.findById(req.body._id , function(err,blog){
-         if (err){
-           return res.json(err);
-         }
-          blog.remove(function(err){
-           if (err){
-             return res.json(err);
-           }
+router.delete('/delblog', function(req, res){
+	Blog.findById(req.body._id , function(err,blog){
+		if(err){
+			return res.json(err);
+		}
+		blog.remove(function(err){
+			if(err){
+				return res.json(err);
+			}
 
-            res.json({
-             message: "Blog removed"
-            });
-          });
-    });
+			res.json({
+				message:"Blog removed"
+			});
+		});
+	});
 });
+
 
 module.exports = router;
