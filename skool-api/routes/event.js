@@ -151,4 +151,23 @@ router.put('/delparticipant', function(req, res){
 	});
 });
 
+
+//foglalkozás törlése
+router.delete('/delevent',function(req,res){
+				Event.findById(req.body._id,function(err,event){
+					if(err){
+						return res.json(err);
+					}
+					event.remove(function(err){
+						if(err){
+							return res.json(err);
+						}
+
+						res.json({
+							message:"event removed"
+						});
+					});
+				});
+});
+
 module.exports = router;
